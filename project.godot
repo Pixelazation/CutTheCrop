@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="Cut the Crop!"
+run/main_scene="uid://be5yov30ml8vi"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=640
 
 [rendering]
 
