@@ -441,5 +441,5 @@ texture = ExtResource("1_errlg")
 centered = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
-position = Vector2(242, 184)
+position = Vector2(200, 154)
+zoom = Vector2(0.8, 0.8)
