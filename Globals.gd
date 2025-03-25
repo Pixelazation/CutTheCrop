@@ -1,3 +1,3 @@
 extends Node
 
-var grid_size = 15
+var grid_size = 11

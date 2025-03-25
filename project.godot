@@ -23,6 +23,7 @@ Globals="*res://Globals.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=640
+window/stretch/scale=0.8
 
 [dotnet]
 

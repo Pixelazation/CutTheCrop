@@ -393,7 +393,7 @@ sources/0 = SubResource("TileSetAtlasSource_74lek")
 sources/1 = SubResource("TileSetAtlasSource_j5jx5")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74lek"]
-size = Vector2(60, 59)
+size = Vector2(35, 34.5)
 
 [node name="Node" type="Node2D"]
 
@@ -413,12 +413,12 @@ position = Vector2(-16, 51)
 script = ExtResource("2_bl13t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(96, 97)
+position = Vector2(146.5, 50.25)
 shape = SubResource("RectangleShape2D_74lek")
 
 [node name="player" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(64, 65)
-scale = Vector2(0.5, 0.492188)
+position = Vector2(128, 32)
+scale = Vector2(0.289063, 0.289063)
 texture = ExtResource("1_errlg")
 centered = false
 
