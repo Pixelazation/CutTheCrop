@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://be5yov30ml8vi"]
+[gd_scene load_steps=18 format=3 uid="uid://be5yov30ml8vi"]
 
 [ext_resource type="Texture2D" uid="uid://c36y7fq26u0i" path="res://icon.svg" id="1_errlg"]
 [ext_resource type="Script" uid="uid://uyllgd5hyl1y" path="res://scenes/player.gd" id="2_bl13t"]
@@ -9,6 +9,7 @@
 [ext_resource type="TileSet" uid="uid://rjsm7g3cej5a" path="res://tilemaps/LevelTiles.tres" id="5_jcd4p"]
 [ext_resource type="Script" uid="uid://dkm2ta7rdmja8" path="res://scenes/player2.gd" id="7_at5dv"]
 [ext_resource type="LabelSettings" uid="uid://bskrmd167cp2r" path="res://styles/labels/score_labels.tres" id="9_uacia"]
+[ext_resource type="Script" uid="uid://c5l2bwuk7okwj" path="res://scenes/timer.gd" id="10_yk7ts"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lpvoh"]
 texture = ExtResource("3_74lek")
@@ -490,6 +491,31 @@ label_settings = ExtResource("9_uacia")
 horizontal_alignment = 1
 
 [node name="Score" type="Label" parent="UI/P2 Info"]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("9_uacia")
+horizontal_alignment = 1
+
+[node name="ClockInfo" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 259.0
+offset_top = -73.0
+offset_right = 345.0
+offset_bottom = 31.0
+
+[node name="Timer" type="Timer" parent="UI/ClockInfo"]
+wait_time = 60.0
+one_shot = true
+autostart = true
+script = ExtResource("10_yk7ts")
+
+[node name="Label" type="Label" parent="UI/ClockInfo"]
+layout_mode = 2
+text = "Time"
+label_settings = ExtResource("9_uacia")
+horizontal_alignment = 1
+
+[node name="Clock" type="Label" parent="UI/ClockInfo"]
 layout_mode = 2
 text = "0"
 label_settings = ExtResource("9_uacia")
