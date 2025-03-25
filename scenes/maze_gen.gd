@@ -90,9 +90,9 @@ func dfs(start: Vector2i):
 			var new_pos = current + pos
 			if new_pos not in seen and can_move_to(new_pos):
 				##why is this from 1 to 1?
-				var chance_of_no_loop = randi_range(1, 1)
+				var chance_of_no_loop = randf_range(0, 1)
 				
-				if will_be_converted_to_wall(new_pos) and chance_of_no_loop == 1:
+				if will_be_converted_to_wall(new_pos) and chance_of_no_loop <= 0.1:
 					place_wall(new_pos)
 				else:
 					found_new_path = true
