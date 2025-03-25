@@ -14,13 +14,13 @@ func _process(delta):
 func move_character(delta):
 	var direction = Vector2.ZERO
 
-	if Input.is_action_pressed("p1_left"):
+	if Input.is_action_pressed("p2_left"):
 		direction.x = -1
-	elif Input.is_action_pressed("p1_right"):
+	elif Input.is_action_pressed("p2_right"):
 		direction.x = 1
-	if Input.is_action_pressed("p1_up"):
+	if Input.is_action_pressed("p2_up"):
 		direction.y = -1  
-	elif Input.is_action_pressed("p1_down"):
+	elif Input.is_action_pressed("p2_down"):
 		direction.y = 1  
 
 	direction = direction.normalized()
