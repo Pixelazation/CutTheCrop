@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://be5yov30ml8vi"]
+[gd_scene load_steps=17 format=3 uid="uid://be5yov30ml8vi"]
 
 [ext_resource type="Texture2D" uid="uid://c36y7fq26u0i" path="res://icon.svg" id="1_errlg"]
 [ext_resource type="Script" uid="uid://uyllgd5hyl1y" path="res://scenes/player.gd" id="2_bl13t"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://tdjw50sfs34n" path="res://tilemaps/placeholder.png" id="3_74lek"]
 [ext_resource type="Texture2D" uid="uid://d0wtn6uoq5hm4" path="res://tilemaps/up-tilemap.png" id="4_j5jx5"]
 [ext_resource type="Script" uid="uid://t8fhvjlx6uqb" path="res://scenes/background.gd" id="4_lpvoh"]
+[ext_resource type="TileSet" uid="uid://rjsm7g3cej5a" path="res://tilemaps/LevelTiles.tres" id="5_jcd4p"]
 [ext_resource type="Script" uid="uid://dkm2ta7rdmja8" path="res://scenes/player2.gd" id="7_at5dv"]
+[ext_resource type="LabelSettings" uid="uid://bskrmd167cp2r" path="res://styles/labels/score_labels.tres" id="9_uacia"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lpvoh"]
 texture = ExtResource("3_74lek")
@@ -400,7 +402,7 @@ size = Vector2(35, 34.5)
 [node name="Node" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-position = Vector2(-393, -154)
+position = Vector2(-537, -187)
 
 [node name="background" type="TileMapLayer" parent="TileMapLayer"]
 tile_set = SubResource("TileSet_j5jx5")
@@ -410,32 +412,35 @@ script = ExtResource("4_lpvoh")
 tile_set = SubResource("TileSet_jcd4p")
 script = ExtResource("2_lpvoh")
 
-[node name="Player1" type="CharacterBody2D" parent="."]
-position = Vector2(-16, 51)
+[node name="crops" type="TileMapLayer" parent="TileMapLayer"]
+tile_set = ExtResource("5_jcd4p")
+
+[node name="Player1" type="CharacterBody2D" parent="TileMapLayer"]
+position = Vector2(390, 153)
 script = ExtResource("2_bl13t")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
-position = Vector2(146.5, 50.25)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/Player1"]
+position = Vector2(3.5, 0.25)
 shape = SubResource("RectangleShape2D_74lek")
 
-[node name="player" type="Sprite2D" parent="Player1"]
-position = Vector2(128, 32)
+[node name="player" type="Sprite2D" parent="TileMapLayer/Player1"]
+position = Vector2(-15, -18)
 scale = Vector2(0.289063, 0.289063)
 texture = ExtResource("1_errlg")
 centered = false
 
-[node name="Player2" type="CharacterBody2D" parent="."]
-position = Vector2(-16, 51)
+[node name="Player2" type="CharacterBody2D" parent="TileMapLayer"]
+position = Vector2(439, 192)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("7_at5dv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
-position = Vector2(281.5, 51.25)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/Player2"]
+position = Vector2(2.5, -1.75)
 shape = SubResource("RectangleShape2D_74lek")
 
-[node name="player" type="Sprite2D" parent="Player2"]
-position = Vector2(263, 33)
+[node name="player" type="Sprite2D" parent="TileMapLayer/Player2"]
+position = Vector2(-16, -20)
 scale = Vector2(0.289063, 0.289063)
 texture = ExtResource("1_errlg")
 centered = false
@@ -443,3 +448,49 @@ centered = false
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(200, 154)
 zoom = Vector2(0.8, 0.8)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 274.0
+offset_top = -90.0
+offset_right = 314.0
+offset_bottom = -50.0
+
+[node name="P1 Info" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 105.0
+offset_right = 383.0
+offset_bottom = 209.0
+
+[node name="Player" type="Label" parent="UI/P1 Info"]
+layout_mode = 2
+text = "PLAYER 1"
+label_settings = ExtResource("9_uacia")
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="UI/P1 Info"]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("9_uacia")
+horizontal_alignment = 1
+
+[node name="P2 Info" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 281.0
+offset_right = 379.0
+offset_bottom = 385.0
+
+[node name="Player" type="Label" parent="UI/P2 Info"]
+layout_mode = 2
+text = "PLAYER 2"
+label_settings = ExtResource("9_uacia")
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="UI/P2 Info"]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("9_uacia")
+horizontal_alignment = 1

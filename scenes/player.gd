@@ -1,7 +1,13 @@
 extends CharacterBody2D
 
 @export var speed: float = 200  # Movement speed
-@onready var tilemap = $"../TileMapLayer"  # Adjust path if needed
+@export var score: int = 0
+@onready var tilemap = $".."  # Adjust path if needed
+@onready var crop_layer = $"../crops"
+@onready var opponent = $"../Player2"
+@onready var score_label = $"../../UI/P1 Info/Score"
+
+var crop_tile = Vector2i(11, 1)
 
 func _ready():
 	var initial_position = position
@@ -10,6 +16,7 @@ func _ready():
 
 func _process(delta):
 	move_character(delta)
+	place_crop()
 
 func move_character(delta):
 	var direction = Vector2.ZERO
@@ -26,6 +33,27 @@ func move_character(delta):
 	direction = direction.normalized()
 	velocity = direction * speed
 	move_and_slide()
+	
+func place_crop():
+	var tile_pos = crop_layer.local_to_map(position)
+	update_score(tile_pos)
+	crop_layer.set_cell(tile_pos, 1, crop_tile)  # Adjust tile ID as needed
+
+func update_score(tile_pos: Vector2):
+	var tile_data = crop_layer.get_cell_tile_data(tile_pos)
+	
+	if (!tile_data):
+		score += 1
+		return
+		
+	var crop = tile_data.get_custom_data("environment")
+	
+	if crop != "crop1":
+		score += 1
+	if crop == "crop2":
+		opponent.score -= 1
+		
+	score_label.text = str(score)
 
 func is_colliding_with_walls(target_position: Vector2) -> bool:
 	if tilemap:
