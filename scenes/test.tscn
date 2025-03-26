@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://be5yov30ml8vi"]
+[gd_scene load_steps=20 format=3 uid="uid://be5yov30ml8vi"]
 
 [ext_resource type="Texture2D" uid="uid://c36y7fq26u0i" path="res://icon.svg" id="1_errlg"]
+[ext_resource type="Script" uid="uid://bgswc4hcnis2j" path="res://scenes/test.gd" id="1_ghpyy"]
 [ext_resource type="Script" uid="uid://uyllgd5hyl1y" path="res://scenes/player.gd" id="2_bl13t"]
 [ext_resource type="Script" uid="uid://de2wqvixb848b" path="res://scenes/maze_gen.gd" id="2_lpvoh"]
 [ext_resource type="Texture2D" uid="uid://tdjw50sfs34n" path="res://tilemaps/placeholder.png" id="3_74lek"]
@@ -9,6 +10,7 @@
 [ext_resource type="TileSet" uid="uid://rjsm7g3cej5a" path="res://tilemaps/LevelTiles.tres" id="5_jcd4p"]
 [ext_resource type="Script" uid="uid://dkm2ta7rdmja8" path="res://scenes/player2.gd" id="7_at5dv"]
 [ext_resource type="LabelSettings" uid="uid://bskrmd167cp2r" path="res://styles/labels/score_labels.tres" id="9_uacia"]
+[ext_resource type="Script" uid="uid://dnqyorn34p4k7" path="res://scenes/press_space.gd" id="10_ajshl"]
 [ext_resource type="Script" uid="uid://c5l2bwuk7okwj" path="res://scenes/timer.gd" id="10_yk7ts"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lpvoh"]
@@ -401,6 +403,7 @@ sources/1 = SubResource("TileSetAtlasSource_j5jx5")
 size = Vector2(35, 34.5)
 
 [node name="Node" type="Node2D"]
+script = ExtResource("1_ghpyy")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-537, -187)
@@ -417,7 +420,7 @@ script = ExtResource("2_lpvoh")
 tile_set = ExtResource("5_jcd4p")
 
 [node name="Player1" type="CharacterBody2D" parent="TileMapLayer"]
-position = Vector2(390, 153)
+position = Vector2(677, 34)
 script = ExtResource("2_bl13t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/Player1"]
@@ -431,7 +434,7 @@ texture = ExtResource("1_errlg")
 centered = false
 
 [node name="Player2" type="CharacterBody2D" parent="TileMapLayer"]
-position = Vector2(439, 192)
+position = Vector2(27, 679)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("7_at5dv")
@@ -474,6 +477,55 @@ horizontal_alignment = 1
 [node name="Score" type="Label" parent="UI/P1 Info"]
 layout_mode = 2
 text = "0"
+label_settings = ExtResource("9_uacia")
+horizontal_alignment = 1
+
+[node name="StartPopup" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = -239.0
+offset_top = 537.0
+offset_right = 121.0
+offset_bottom = 641.0
+
+[node name="PressSpaceToStart" type="Label" parent="UI/StartPopup"]
+layout_mode = 2
+text = "Press 'Space' to start"
+label_settings = ExtResource("9_uacia")
+horizontal_alignment = 1
+script = ExtResource("10_ajshl")
+
+[node name="PressSpaceToRestart" type="Label" parent="UI/StartPopup"]
+visible = false
+layout_mode = 2
+text = "Press 'Space' to restart"
+label_settings = ExtResource("9_uacia")
+horizontal_alignment = 1
+
+[node name="GameResultsPopup" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = -239.0
+offset_top = 169.0
+offset_right = 121.0
+offset_bottom = 327.0
+
+[node name="WinnerPlayer1" type="Label" parent="UI/GameResultsPopup"]
+visible = false
+layout_mode = 2
+text = "Player 1 Wins"
+label_settings = ExtResource("9_uacia")
+horizontal_alignment = 1
+
+[node name="WinnerPlayer2" type="Label" parent="UI/GameResultsPopup"]
+visible = false
+layout_mode = 2
+text = "Player 2 Wins"
+label_settings = ExtResource("9_uacia")
+horizontal_alignment = 1
+
+[node name="Draw" type="Label" parent="UI/GameResultsPopup"]
+visible = false
+layout_mode = 2
+text = "Draw"
 label_settings = ExtResource("9_uacia")
 horizontal_alignment = 1
 
