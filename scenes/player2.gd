@@ -44,14 +44,12 @@ func update_score(tile_pos: Vector2):
 	
 	if (!tile_data):
 		score += 1
-		Globals.player2_score +=1
 		return
 		
 	var crop = tile_data.get_custom_data("environment")
 	
 	if crop != "crop2":
 		score += 1
-		Globals.player2_score +=1
 	if crop == "crop1":
 		opponent.score -= 1
 		

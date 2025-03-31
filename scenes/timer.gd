@@ -5,6 +5,8 @@ extends Timer
 @onready var winnerPlayer2 = $"../../GameResultsPopup/WinnerPlayer2"
 @onready var draw = $"../../GameResultsPopup/Draw"
 @onready var restart = $"../../StartPopup/PressSpaceToRestart"
+@onready var score1 = $"../../P1 Info/Score"
+@onready var score2 = $"../../P2 Info/Score"
 
 var game_over = false  # Flag to check if the game is over
 
@@ -22,9 +24,9 @@ func _input(event):
 		get_tree().reload_current_scene()
 
 func show_results():
-	if Globals.player1_score > Globals.player2_score:
+	if int(score1.text) > int(score2.text):
 		winnerPlayer1.visible = true			
-	elif Globals.player1_score < Globals.player2_score:
+	elif int(score1.text) < int(score2.text):
 		winnerPlayer2.visible = true
 	else:
 		draw.visible = true
