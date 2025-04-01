@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var crop_layer = $"../crops"
 @onready var opponent = $"../Player1"
 @onready var score_label = $"../../UI/P2 Info/Score"
+@onready var nav_agent := $Pathfinder as NavigationAgent2D
 
 var crop_tile = Vector2i(9, 5)
 
@@ -13,26 +14,37 @@ func _ready():
 	var initial_position = position
 	if is_colliding_with_walls(initial_position):
 		position = find_nearest_non_wall_tile(initial_position)
+	makepath()
 
-func _process(delta):
+func _physics_process(delta):
 	move_character(delta)
 	place_crop()
 
 func move_character(delta):
 	var direction = Vector2.ZERO
 
-	if Input.is_action_pressed("p2_left"):
-		direction.x = -1
-	elif Input.is_action_pressed("p2_right"):
-		direction.x = 1
-	if Input.is_action_pressed("p2_up"):
-		direction.y = -1  
-	elif Input.is_action_pressed("p2_down"):
-		direction.y = 1  
+	#if Input.is_action_pressed("p2_left"):
+		#direction.x = -1
+	#elif Input.is_action_pressed("p2_right"):
+		#direction.x = 1
+	#if Input.is_action_pressed("p2_up"):
+		#direction.y = -1  
+	#elif Input.is_action_pressed("p2_down"):
+		#direction.y = 1  
 
-	direction = direction.normalized()
+	#direction = direction.normalized()
+	
+	direction = to_local(nav_agent.get_next_path_position()).normalized()
+	
 	velocity = direction * speed
 	move_and_slide()
+	
+func makepath():
+	nav_agent.target_position = opponent.global_position
+	
+func _on_pathfinder_timer_timeout():
+	makepath()
+	print("new path!")
 	
 func place_crop():
 	var tile_pos = crop_layer.local_to_map(position)

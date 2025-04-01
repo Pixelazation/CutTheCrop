@@ -8,6 +8,7 @@ var starting_pos = Vector2i()
 ##The layer being modified
 const main_layer = 0
 ##tile coordinates for walls
+const path_atlas_coords = Vector2i(0, 0)
 const normal_wall_atlas_coords = Vector2i(3, 3)
 ##const walkable_atlas_coords = Vector2i(0, 0)
 ##tile source id for placing tiles
@@ -29,8 +30,15 @@ var adj4 = [
 
 func _ready() -> void:
 	##Globals.letters_to_show.clear()
+	place_walk()
 	place_border()
 	dfs(starting_coords)
+	
+func place_walk():
+	var grid_size = Globals.grid_size+1  # Get the grid size from the global script
+	for x in range(grid_size):
+		for y in range(grid_size):
+			set_cell(Vector2i(x,y), SOURCE_ID, path_atlas_coords)  # Adjust 0 to the correct tile ID/index
 	
 func place_border():
 	for y in range(-1, y_dim):
@@ -45,7 +53,7 @@ func place_border():
 ##unlike TileMap (deprecated), we don't use layers for set_cell
 		
 func delete_cell_at(pos: Vector2):
-	set_cell(pos)
+	set_cell(pos, SOURCE_ID, path_atlas_coords)
 
 func place_wall(pos: Vector2):
 	set_cell(pos, SOURCE_ID, normal_wall_atlas_coords)
