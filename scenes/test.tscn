@@ -474,12 +474,10 @@ navigation_layers = 3
 path_postprocessing = 1
 avoidance_layers = 2
 avoidance_mask = 2
-debug_enabled = true
 debug_path_custom_color = Color(1, 0.231373, 0.0980392, 1)
 
 [node name="PathfinderTimer" type="Timer" parent="TileMapLayer/Player2"]
-wait_time = 0.8
-autostart = true
+wait_time = 3.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(200, 154)
@@ -605,4 +603,6 @@ text = "0"
 label_settings = ExtResource("9_uacia")
 horizontal_alignment = 1
 
+[connection signal="link_reached" from="TileMapLayer/Player2/Pathfinder" to="TileMapLayer/Player2" method="_on_pathfinder_link_reached"]
+[connection signal="navigation_finished" from="TileMapLayer/Player2/Pathfinder" to="TileMapLayer/Player2" method="_on_pathfinder_navigation_finished"]
 [connection signal="timeout" from="TileMapLayer/Player2/PathfinderTimer" to="TileMapLayer/Player2" method="_on_pathfinder_timer_timeout"]
