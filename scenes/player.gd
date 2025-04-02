@@ -6,8 +6,10 @@ extends CharacterBody2D
 @onready var crop_layer = $"../crops"
 @onready var opponent = $"../Player2"
 @onready var score_label = $"../../UI/P1 Info/Score"
+@onready var animated_sprite = $AnimatedSprite2D
 
-var crop_tile = Vector2i(11, 1)
+var crop_tile = Vector2i(3, 1)
+var source_id = 0;
 
 func _ready():
 	var initial_position = position
@@ -23,12 +25,16 @@ func move_character(delta):
 
 	if Input.is_action_pressed("p1_left"):
 		direction.x = -1
+		animated_sprite.play("left")
 	elif Input.is_action_pressed("p1_right"):
 		direction.x = 1
+		animated_sprite.play("right")
 	if Input.is_action_pressed("p1_up"):
 		direction.y = -1  
+		animated_sprite.play("up")
 	elif Input.is_action_pressed("p1_down"):
 		direction.y = 1  
+		animated_sprite.play("down")
 
 	direction = direction.normalized()
 	velocity = direction * speed
@@ -37,7 +43,7 @@ func move_character(delta):
 func place_crop():
 	var tile_pos = crop_layer.local_to_map(position)
 	update_score(tile_pos)
-	crop_layer.set_cell(tile_pos, 1, crop_tile)  # Adjust tile ID as needed
+	crop_layer.set_cell(tile_pos, source_id, crop_tile)  # Adjust tile ID as needed
 
 func update_score(tile_pos: Vector2):
 	var tile_data = crop_layer.get_cell_tile_data(tile_pos)

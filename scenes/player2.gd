@@ -8,8 +8,10 @@ extends CharacterBody2D
 @onready var opponent = $"../Player1"
 @onready var score_label = $"../../UI/P2 Info/Score"
 @onready var nav_agent := $Pathfinder as NavigationAgent2D
+@onready var animated_sprite = $AnimatedSprite2D
 
-var crop_tile = Vector2i(9, 5)
+var crop_tile = Vector2i(6, 1)
+var source_id = 0
 
 func _ready():
 	var initial_position = position
@@ -23,21 +25,21 @@ func _physics_process(delta):
 
 func move_character(delta):
 	var direction = Vector2.ZERO
+	direction = to_local(nav_agent.get_next_path_position()).normalized()
+	velocity = direction * speed
 
-	#if Input.is_action_pressed("p2_left"):
-		#direction.x = -1
-	#elif Input.is_action_pressed("p2_right"):
-		#direction.x = 1
-	#if Input.is_action_pressed("p2_up"):
-		#direction.y = -1  
-	#elif Input.is_action_pressed("p2_down"):
-		#direction.y = 1  
+	# Determine animation based on direction
+	if direction.x > 0:
+		animated_sprite.play("right")
+	elif direction.x < 0:
+		animated_sprite.play("left")
+	elif direction.y > 0:
+		animated_sprite.play("down")
+	elif direction.y < 0:
+		animated_sprite.play("up")
 
 	#direction = direction.normalized()
 	
-	direction = to_local(nav_agent.get_next_path_position()).normalized()
-	
-	velocity = direction * speed
 	move_and_slide()
 	
 func makepath():
@@ -111,7 +113,7 @@ func _on_pathfinder_navigation_finished():
 func place_crop():
 	var tile_pos = crop_layer.local_to_map(position)
 	update_score(tile_pos)
-	crop_layer.set_cell(tile_pos, 1, crop_tile)  # Adjust tile ID as needed
+	crop_layer.set_cell(tile_pos, source_id, crop_tile)  # Adjust tile ID as needed
 	
 func update_score(tile_pos: Vector2):
 	var tile_data = crop_layer.get_cell_tile_data(tile_pos)

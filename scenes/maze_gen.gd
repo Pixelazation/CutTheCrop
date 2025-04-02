@@ -5,14 +5,13 @@ class_name MazeGen
 ##2D vector using integer coordinates
 ##Stores starting position
 var starting_pos = Vector2i()
-##The layer being modified
-const main_layer = 0
+
 ##tile coordinates for walls
 const path_atlas_coords = Vector2i(0, 0)
-const normal_wall_atlas_coords = Vector2i(3, 3)
+const normal_wall_atlas_coords = Vector2i(1, 0)
 ##const walkable_atlas_coords = Vector2i(0, 0)
 ##tile source id for placing tiles
-const SOURCE_ID = 1
+const SOURCE_ID = 2
 
 ##mazes dimensions
 var y_dim = Globals.grid_size
