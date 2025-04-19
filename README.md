@@ -20,7 +20,7 @@ How to Play
 
 ![image](https://github.com/user-attachments/assets/f6cb882a-d3d9-48cb-9c1c-bf7ce10766ff)
 
-2. Move using 'WASD' keys and get the most points to win
+2. Move using 'WASD' keys and get the most points by planting as much crops to win
 
 ![image](https://github.com/user-attachments/assets/2c9c61d2-5af6-43b5-91eb-239ccfdc32c4)
 
