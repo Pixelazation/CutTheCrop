@@ -26,6 +26,6 @@ How to Play
 
 ![image](https://github.com/user-attachments/assets/01ac7e14-117b-4e17-8a4d-1cd0519a7356)
 
-3. Press Space to restart
+3. Press 'Space' to restart
 
 ![image](https://github.com/user-attachments/assets/2eef2712-b2da-41f4-88e7-184247a3550d)
